@@ -1,0 +1,40 @@
+{% extends 'pagina/layout.html' %}
+{% block content %}
+    <h1>Desde Busqueda</h1>
+    {% if categoria_filtro %}
+        <div>{{ categoria_filtro }}</div>
+    {% else %}
+        <div>Todas las categorías</div>
+    {% endif %}
+    
+    <ul>
+        {% for un_item in lista_items %}
+            <div class="row">
+                <div class="col-12 col-md-6 offset-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="{% url 'pagina:vista' un_item.id %}">Ver #{{un_item.id}}</a>
+                            {% if perms.pagina.change_item %}
+                                <a href="{% url 'pagina:editar' un_item.id %}">Modificar Item</a>
+                            {% endif %}
+                            {% if perms.pagina.delete_item %}
+                                <a href="{% url 'pagina:eliminar' un_item.id %}">Eliminar Item</a>
+                            {% endif %}
+                            {{ un_item.titulo }}
+                            
+                            {% empty %}
+                                <li>No hay Items en esta categoría</li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </ul>
+    {% if perms.pagina.add_item %}
+        <a href="{% url 'pagina:nuevo' %}">Publicar un nuevo Item</a>
+        <br>
+    {% endif %}
+
+
+
+{% endblock %}

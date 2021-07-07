@@ -1,0 +1,108 @@
+{% extends 'pagina/layout.html' %}
+{% block content %}
+    <div class="container-fluid">
+
+    <div class="text-center"
+            style="
+                font-weight: 500;
+                font-size: 1em;
+                color: #000;
+                padding: 0.3em;
+                margin-top: 0.5em;
+            "
+    >
+        {% if categoria_filtro %}
+            <div>{{ categoria_filtro }}</div>
+        {% else %}
+            Todas las categorías
+        {% endif %}
+    </div>
+    <hr />
+        <div class="row">
+        {% for un_item in lista_items %}
+            {% if forloop.counter <= 3 %}
+           
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-title text-center">
+                                <h4 style="padding:0.5em;">{{un_item.titulo}}</h4>
+                            </div> 
+                            <div class="card-body">
+                                <div class="text-center" >
+                                    <p><img
+                                        src="{{ media_url }}{{ un_item.imagen.url }}"
+                                        class="card-img-bottom img-fluid"
+                                        alt="{{ un_item.imagen.name }}"
+                                        style="min-height:15em;"
+                                    /></p>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <a class="btn btn-success" href="{% url 'pagina:vista' un_item.id %}">Ver {{un_item.titulo}}</a>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    {% if perms.pagina.change_item %}
+                                    <div class="col-12 col-md-6 col-sm-12">
+                                        <a
+                                        style="width: 100%; padding: 0.3em;"
+                                        class="btn btn-outline-warning" href="{% url 'pagina:editar' un_item.id %}">Modificar Item</a>
+                                    </div>
+                                    {% endif %}
+                                    {% if perms.pagina.delete_item %}
+                                        <div class="col-12 col-md-6 col-sm-12">
+                                        <a
+                                        style="width: 100%; padding: 0.3em; margin-top: 0.1em;"
+                                        class="btn btn-outline-danger btn-block" href="{% url 'pagina:eliminar' un_item.id %}">Eliminar Item</a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                
+        {% endfor %}
+        </div>
+        <div class="mt-3 mb-3">
+            <div class="text-center">
+                <h4>Otros productos</h4>
+                <hr>
+            </div>
+            <div class="row">
+                {% for un_item in lista_items %}
+                   {% if forloop.counter >= 3 and forloop.counter <= 10 %}
+                    <div class="d-grip">
+                        <a class="btn btn-outline-info" style="text-decoration: none; border: none; color: black;" href="{% url 'pagina:vista' un_item.id %}" >{{un_item.titulo}}: {{un_item.contenido}}</a>
+                    </div>
+                   {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+</div>
+
+
+{% endblock %}
+
+
+
+{% comment %} <div class="container-fluid">
+    
+        <div class="row">
+            <div>Rste ers eñ te,´ñatre</div>
+        </div>
+        <div class="row products-main text-center">
+            <div class="col-md-4 col-12">
+                Producto 1
+            </div>
+            
+            <div class="col-md-4 col-12">
+                Producto 2
+            </div>
+            
+            <div class="col-md-4 col-12">
+                Producto 3
+            </div>
+        </div>
+    
+    </div> {% endcomment %}

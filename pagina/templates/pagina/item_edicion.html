@@ -1,0 +1,25 @@
+{% extends 'pagina/layout.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Editar item #{{item.id}}</h1>
+                        <form class="" enctype="multipart/form-data" method="post">
+                            {% csrf_token %}
+                            {{ form | crispy }}
+                            <br>
+                            <hr>
+                            <div class="d-flex justify-content-end">
+                                <input type="submit" value="Confirmar Edición" class="btn btn-primary">
+                            </div>
+                        </form>
+                        <div class="justify-content-end">
+                            <a type="button" href="{% url 'pagina:index' %}" >Volver al inicio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

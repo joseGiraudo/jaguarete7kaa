@@ -1,0 +1,1 @@
+web: gunicorn jaguarete7kaa.wsgi --log-file -

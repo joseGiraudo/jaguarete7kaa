@@ -1,0 +1,42 @@
+{% extends "registration/layout.html" %}
+
+    {% block content %}
+
+        {% if form.errors %}
+            <p class="alert alert-danger">El usuario y la clave no coinciden, por favor intente nuevamente.</p>
+        {% endif %}
+        {% load crispy_forms_tags %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 offset-md-3">
+                    <div class="card">
+                        <h3>Acceder al Blog</h3>
+                        <div class="card-body">
+                            
+                            <form method="post" action="">
+                                {% csrf_token %}
+
+                                {{ form | crispy }}
+
+                                <br>
+                                <hr>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <input type="submit" value="ACCEDER" class="btn btn-outline-primary me-md-2"/>
+                                    <input type="hidden" name="next" value="{{ next }}" />
+                                </div>
+                            </form>
+
+                            <p><a href="{% url 'password_reset' %}" class="link-warning">¿Olvidó su contraseña?</a></p>
+                            <hr>
+                            <p>¿No tienes una cuenta? <a href="{% url 'pagina:registro' %}">Registrate Aquí</a></p>
+                            <div class="badge bg-secondary text-wrap">
+                                <a href="{% url 'pagina:index' %}" style="color:white;">Volver al Home</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+

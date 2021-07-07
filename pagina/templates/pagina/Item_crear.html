@@ -1,0 +1,29 @@
+{% extends 'pagina/layout.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+    <br>
+    <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Publica un nuevo item</h2>
+                    <hr>
+                    <form class="" enctype="multipart/form-data" action="{% url 'pagina:nuevo' %}" method="post">
+                        {% csrf_token %}
+                        
+                        {{ form | crispy }}
+                        <br>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <input type="submit" value="Publicar" class="btn btn-primary">
+                        </div>
+                        <div class="justify-content-end">
+                            <a type="button" href="{% url 'pagina:index' %}" >Volver al inicio</a>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>  
+{% endblock %}
