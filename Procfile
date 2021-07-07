@@ -1,1 +1,1 @@
-web: gunicorn src.wsgi --log-file -
+web: gunicorn jaguarete7kaa.wsgi --log-file -
